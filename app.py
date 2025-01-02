@@ -1,10 +1,20 @@
 import streamlit as st
 from pymongo import MongoClient
 from datetime import datetime
+import os 
+from dotenv import load_dotenv
+load_dotenv()
 
-# Configuração do MongoDB
-client = MongoClient("mongodb://localhost:27017/")
-db = client["feiras_db"]
+
+# Configuração do MongoDB Online
+client = MongoClient("mongodb+srv://edufdu:Morelena2004@cluster0.mongodb.net/Feiras_SmartSales?retryWrites=true&w=majority")
+db = client["Feiras_SmartSales"]
+
+MONGO_URI = os.getenv("MONGO_URI")
+client = MongoClient(MONGO_URI)
+db = client["Feiras_SmartSales"]
+
+
 
 
 try:
@@ -21,7 +31,7 @@ admin = {
 }
 
 #db.Usuarios.insert_one(admin)
-#print("Administrador adicionado com sucesso!")
+print("Administrador adicionado com sucesso!")
 
 def autenticar_usuario():
     username = st.text_input("username")
